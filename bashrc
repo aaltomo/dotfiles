@@ -157,6 +157,12 @@ cb() {
   fi
 }
 
+google () {
+ u=`perl -MURI::Escape -wle 'print "http://google.com/search?q=".
+    uri_escape(join " ",  @ARGV)' $@`
+ /usr/bin/w3m -F $u
+}
+
 # Look busy
 random_hex() { for i in $(seq 1 2); do echo -n $(echo "obase=16; $(($RANDOM % 16))" | bc | tr '[A-Z]' '[a-z]'); done; }
 look_busy() { clear; while true; do head -n 500 /dev/urandom | hexdump -C | grep --color=auto "`random_hex` `random_hex`"; done; }
